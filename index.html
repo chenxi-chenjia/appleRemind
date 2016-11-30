@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="remind">
+<head>
+	<meta charset="UTF-8">
+	<title>提醒事项</title>
+	<script src="js/angular.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/index.js"></script>
+</head>
+<body>
+<div id="box" ng-controller="mianCtrl">
+	<div id="left">
+		<div class="header">
+			<a href="#" class="left">
+				<div class="icon-logo icon"></div>
+				<div class="remind">
+					<h3>提醒事项</h3>
+					<div class="icon-move icon"></div>
+					<div class="icon-out icon"></div>
+				</div>
+			</a>
+			<a href="javascrpit:;" class="right" ng-click="addRemind()">
+				<div class="add-icon-move icon"></div>
+				<div class="add-icon-out icon"></div>
+			</a>
+		</div>
+		<div class="reminded">
+			<div class="icon-clock icon"></div>
+			<h4>已计划</h4>
+			<div class="icon-line icon"></div>
+		</div>
+		<ul class="list" ng-selecte>
+			<li ng-repeat="$i in remind track by $index" ng-class="{selecte:$i.selecte}" ng-click="choseSelect($index)" ng-dbclick="edit($index)">
+				<div class="icon-color icon left{{$i.theme}}"></div>
+				<h4>
+					<input type="text" ng-model="$i.title" readonly>
+					<div class="icon icon-line"></div>
+				</h4>
+				<a href="#" class="right-icon">
+					<div class="icon-wifi-move icon"></div>
+					<div class="icon-wifi-out icon"></div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div id="right">
+		<div class="header">
+			<div class="left">
+				<div class="icon icon-serch"></div>
+				<h4>
+					<input type="text" placeholder="搜索所有提醒">
+				</h4>
+			</div>
+			<div class="right">
+				<a href="#" class="seting">
+					<h4>闫晨嘉</h4>
+					<div class="icon"></div>
+				</a>
+				<div class="icon icon-line"></div>
+				<a class="right">
+					<div class="icon"></div>
+				</a>
+			</div>
+		</div>
+		<div class="content newplan">
+			<h1 class="{{remind[obtain()].theme}}">
+				{{remind[obtain()].title}}
+				<div class="options" ng-optain>
+					<h4 class="right"><a href="#" class="hover {{remind[obtain()].theme}}">选项</a></h4>
+					<div class="hiden">
+						<div class="top">
+							<input type="text" ng-model="remind[obtain()].title" class="{{remind[obtain()].theme}}">
+						</div>
+						<div class="color-title">
+							<h3>列表颜色</h3>
+						</div>
+						<ul class="color-list">
+							<li class="{{$n.theme}}" ng-repeat="$n in color" ng-class="{iconStyle:$n.selecte}">
+								<div class="iconStyle"></div>
+							</li>
+						</ul>
+						<div class="bottom">
+							<div class="delete" ng-click="deleteR()">
+								<a href="#">删除</a>
+							</div>
+							<div class="right">
+								<div class="cancle">
+									<a href="#" ng-click="cancleR()">取消</a>
+								</div>
+								<div class="line"></div>
+								<div class="complete">
+									<a href="#" ng-click="completedR()">完成</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</h1>
+			<div class="matters">
+				<div class="completed" ng-completed>
+					<div class="left left-click icon">
+					</div>
+					<h4 class="text">
+						已完成：
+						<span>{{remind[obtain()].completed.length}}</span> 
+						项
+						<h4 class="clear">
+							<a href="#" class="{{remind[obtain()].theme}}" ng-click="clearDown()">清除已完成事项</a>
+						</h4>
+					</h4>
+					<div class="hiden">
+						<h5>{{Date().year}} 年 {{Date().month}} 月 {{Date().date}} 日 {{dateDay()}}</h5>
+						<ul class="completed-matter">
+							<li ng-repeat="$i in remind[obtain()].completed track by $index">
+								<div class="left-icon icon {{remind[obtain()].theme}}" ng-click="returnData($index)"></div>
+								<h4>
+									{{$i}}
+								</h4>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<ul class="remind-event" ng-remind>
+					<li ng-repeat="$i in remind[obtain()].unfinished track by $index" class="{{remind[obtain()].theme}}">
+					<div class="zhe {{remind[obtain()].theme}}"></div>
+						<div class="left-icon icon {{remind[obtain()].theme}}"></div>
+						<h4>
+							<input type="text" value="{{$i}}">
+						</h4>
+					</li>
+				</ul>
+				<div class="addevent" ng-addevent>
+					<h4>新项目...</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
